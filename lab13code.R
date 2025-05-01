@@ -43,7 +43,7 @@ error.df <- tibble(
     error = error.vals
   )
 
-ggplot(error.df, aes(x = t, y = error)) +
+edgeworth.graph <- ggplot(error.df, aes(x = t, y = error)) +
   geom_line(size = 1) +
   labs(
     title    = "Edgeworth Approximation Error vs t",
@@ -52,6 +52,8 @@ ggplot(error.df, aes(x = t, y = error)) +
     y        = "Edgeworth Error"
   ) +
   theme_minimal()
+
+ggsave("edgeworth.pdf", plot = edgeworth.graph, height = 4, width= 7)
 
 ####    C   ####
 alpha <- .05
@@ -440,7 +442,7 @@ randomization.plot.closer <- ggplot() +
 
 # Randomization Test Confidence Interval for "closer"
 R             <- 1000
-mu0.iterate   <- 0.01
+mu0.iterate   <- 0.0001
 starting.point <- mean(finch.dat$closer)
 
 #— Lower bound search
@@ -491,6 +493,10 @@ repeat {
 
 ciR_closer <- c(mu.lower, mu.upper)
 ciR_closer  # randomization 95% CI for closer
+
+
+
+
 
 
 
@@ -555,7 +561,7 @@ randomization.plot.further <- ggplot() +
 
 # Randomization Test Confidence Interval for "further"
 R             <- 1000
-mu0.iterate   <- 0.01
+mu0.iterate   <- 0.0001
 starting.point <- mean(finch.dat$further)
 
 #— Lower bound search
@@ -668,7 +674,7 @@ randomization.plot.closer.diff <- ggplot() +
 
 # Randomization Test Confidence Interval for "diff"
 R             <- 1000
-mu0.iterate   <- 0.01
+mu0.iterate   <- 0.0001
 starting.point <- mean(finch.dat$diff)
 
 #— Lower bound search
